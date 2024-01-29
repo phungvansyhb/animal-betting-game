@@ -1,40 +1,23 @@
 'use client'
 
 import * as Ably from 'ably';
-import { AblyProvider, useAbly, useChannel , getContext } from "ably/react"
-import { MouseEventHandler, MouseEvent, useState, useContext, createContext } from 'react'
+import { AblyProvider, useChannel } from "ably/react";
+import { useState } from 'react';
 import Logger, { LogEntry } from '../../components/logger';
-import SampleHeader from '../../components/SampleHeader';
 import { TOPIC } from '../constant';
+import CreateRoom from './CreateRoom';
 
 
 export default function PubSubClient() {
-
   const client = new Ably.Realtime.Promise ({ authUrl: '/token', authMethod: 'POST' });
-  client.channels.get('á')
   return (
     <AblyProvider client={ client }>
         <CreateRoom/>
-        <PubSubMessages/>
+        {/* <PubSubMessages/> */}
     </AblyProvider>
   )
 }
 
-function CreateRoom(){
-  const [roomName , setRoomName] = useState('')
-  const {ably , channel} = useChannel(TOPIC.GAME_ROOM.CREATE);
-
-  const handleCreateRoom: MouseEventHandler = (_event: MouseEvent<HTMLButtonElement>) => {
-    if(channel === null) return
-    
-    channel.publish(TOPIC.GAME_ROOM.CREATE, {text: 'room create'} )
-  }
-
-  return <div>
-    <input value={roomName} onChange={e=>setRoomName(e.target.value)}></input>
-    <button onClick={handleCreateRoom}>Create</button>
-  </div>
-}
 
 
 function PubSubMessages() {
