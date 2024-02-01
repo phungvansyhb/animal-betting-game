@@ -13,11 +13,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>
-        <div className="flex flex-row bg-white">
-          <div className="flex flex-row gap-4 p-12 grow">
+      <body className='w-screen'>
+        <div className="w-full p-4 ">
             {children}
-          </div>
         </div>
       </body>
     </html>

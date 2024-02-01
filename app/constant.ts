@@ -3,7 +3,7 @@ export const TOPIC = {
     GAME_ROOM : {
         _:'game_room',
         CREATE : 'game_room:create',
-        LIST : 'game_room:list',
+        DELETE : 'game_room:delete',
         JOIN : 'game_room:join',
         QUIT : 'game_room:quit',
     },

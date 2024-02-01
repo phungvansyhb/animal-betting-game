@@ -3,20 +3,19 @@ export type Room = {
   id: string;
   maxMember?: string;
   minBet?: number;
+  hostId:string // connectionId 
+  /* use presence api to track */
+  // members: string[];
 };
 
-export type currentRoom = {
-  id: string;
-  name: string;
-  minBet: number;
-  members: User[];
-  status: "betting" | "start";
-};
-
+export enum STATUS_ENUM {
+  ACTIVE = 'ACTIVE',
+  INACTIVE = "INACTIVE"
+}
 export type User = {
   id: string;
-  isActive: boolean;
+  status: STATUS_ENUM;
   money: number;
   bets: number[];
-  isHost: boolean;
+  // isHost: boolean;
 };

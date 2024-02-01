@@ -30,7 +30,7 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts"
-, "components/layout.tsx", "pages/pub-sub.old", "pages/index.old", "app/page.tsx.old", "app/pub-sub/pubsub-client.tsx.old"  ],
+, "components/layout.tsx", "pages/pub-sub.old", "pages/index.old", "app/page.tsx.old", "app/game/pubsub-client.tsx.old"  ],
   "exclude": [
     "node_modules"
   ]

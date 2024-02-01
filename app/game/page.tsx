@@ -6,8 +6,7 @@
 import React, { SetStateAction, createContext, useState } from "react";
 import "../global.css";
 import dynamic from 'next/dynamic';
-import Sidebar from "../../components/Sidebar.tsx";
-import { Room } from "../../types/Room.type.ts";
+import {  Room } from "../../types/Room.type.ts";
 
 const PubSubClient = dynamic(() => import('./pubsub-client.tsx'), {
   ssr: false,
@@ -16,29 +15,34 @@ const PubSubClient = dynamic(() => import('./pubsub-client.tsx'), {
 
 type GameContext = {
     listRoom : Room[],
-    setRoom : React.Dispatch<SetStateAction<Room[]>> 
+    setRoom : React.Dispatch<SetStateAction<Room[]>> ,
+    currentRoom : Room|undefined , 
+    setCurrentRoom :  React.Dispatch<SetStateAction<Room|undefined>> ,
+    connectId : string,
+    setConnectId : React.Dispatch<SetStateAction<string>>,
 }
 
 export const GameContext=  createContext<GameContext>({
   listRoom : [],
-  setRoom : ()=> {}
+  setRoom : ()=> {},
+  currentRoom : undefined,
+  setCurrentRoom : ()=> {},
+  connectId : '',
+  setConnectId : ()=>{}
 })
 
 
 const PubSub = () => {
 
-  const pageId="PubSubChannels"
   const [listRoom , setRoom] = useState<Room[]>([])   
-  const [currentRoom , setCurrentRoom] = useState()
+  const [currentRoom , setCurrentRoom] = useState<Room|undefined>()
   const [members , setMembers] = useState()
-
+  const [connectId , setConnectId] = useState('')
   return (
       <>
-        <Sidebar pageId={pageId} />
-        <GameContext.Provider value={{listRoom, setRoom}}>
-          <div className="flex flex-col grow gap-6 pt-12 pr-12 pb-12 pl-12 rounded-2xl border-slate-100 border-t border-b border-l border-r border-solid border h-[864px] bg-slate-50">
+        {/* <Sidebar pageId={pageId} /> */}
+        <GameContext.Provider value={{listRoom, setRoom , currentRoom , setCurrentRoom , connectId , setConnectId }}>
             <PubSubClient />
-          </div>
         </GameContext.Provider>
       </>
       
