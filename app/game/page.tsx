@@ -18,8 +18,8 @@ type GameContext = {
     setRoom : React.Dispatch<SetStateAction<Room[]>> ,
     currentRoom : Room|undefined , 
     setCurrentRoom :  React.Dispatch<SetStateAction<Room|undefined>> ,
-    connectId : string,
-    setConnectId : React.Dispatch<SetStateAction<string>>,
+    // connectId : string,
+    // setConnectId : React.Dispatch<SetStateAction<string>>,
 }
 
 export const GameContext=  createContext<GameContext>({
@@ -27,8 +27,8 @@ export const GameContext=  createContext<GameContext>({
   setRoom : ()=> {},
   currentRoom : undefined,
   setCurrentRoom : ()=> {},
-  connectId : '',
-  setConnectId : ()=>{}
+  // connectId : '',
+  // setConnectId : ()=>{}
 })
 
 
@@ -41,7 +41,7 @@ const PubSub = () => {
   return (
       <>
         {/* <Sidebar pageId={pageId} /> */}
-        <GameContext.Provider value={{listRoom, setRoom , currentRoom , setCurrentRoom , connectId , setConnectId }}>
+        <GameContext.Provider value={{listRoom, setRoom , currentRoom , setCurrentRoom  }}>
             <PubSubClient />
         </GameContext.Provider>
       </>

@@ -19,3 +19,4 @@ export type User = {
   bets: number[];
   // isHost: boolean;
 };
+

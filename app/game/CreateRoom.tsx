@@ -1,4 +1,4 @@
-import { useChannel } from "ably/react";
+import { useAbly, useChannel } from "ably/react";
 import {
   MouseEvent,
   MouseEventHandler,
@@ -6,15 +6,17 @@ import {
   useEffect,
   useState,
 } from "react";
-import { TOPIC } from "../constant";
+import { DB_PATH, TOPIC } from "../constant";
 import {Types} from "ably";
 import { GameContext } from "./page";
 import {  Room } from "../../types/Room.type";
+import firebaseAddData from "../../firebase/firebaseAddData";
 
 /*  TODO : user can create room, search room by name. When user create room succes will move to screen gameroom */
 
 export default function CreateRoom() {
-  const { listRoom, setRoom, setCurrentRoom , connectId } = useContext(GameContext);
+  const { listRoom, setRoom, setCurrentRoom  } = useContext(GameContext);
+  const {connection} = useAbly()
   const [roomName, setRoomName] = useState("");
   /* TODO : add options to query history message */
   const { channel } = useChannel(
@@ -28,6 +30,7 @@ export default function CreateRoom() {
       setRoom((cur) => [...cur, room]);
     }
   );
+  
   useEffect(() => {
     if (channel) {
       channel.history().then((data) => {
@@ -45,10 +48,11 @@ export default function CreateRoom() {
   const handleCreateRoom: MouseEventHandler = (
     e: MouseEvent<HTMLButtonElement>
   ) => {
-    const room = { name: roomName, id: crypto.randomUUID(), hostId : connectId };
+    const room = { name: roomName, id: crypto.randomUUID(), hostId : connection.id! };
     if (channel === null) return;
     channel.publish(TOPIC.GAME_ROOM.CREATE, room);
-    setCurrentRoom({...room  });
+    setCurrentRoom({...room });
+    firebaseAddData(DB_PATH.ROOM+room.id , room)
   };
   function handleJoinRoom(room: Room) {
     /* TODO : pusblish event join room to push user to roomData */

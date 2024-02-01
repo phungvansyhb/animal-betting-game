@@ -17,3 +17,8 @@ export const TOPIC = {
         END : 'game_action:end',
     }
 }
+
+
+export const DB_PATH = {
+    ROOM : 'roomList/'
+}
