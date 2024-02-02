@@ -1,11 +1,11 @@
 import firebase_app from "./config";
-import { getDatabase, ref, set } from "firebase/database";
+import { getDatabase, ref, set  } from "firebase/database";
 
 // Get the Realtime Database instance
 const db = getDatabase(firebase_app);
 
 // Function to add data to a Realtime Database path
-export default async function firebaseAddData(
+export async function firebaseAddData(
   path: string,
   data: any
 ) {

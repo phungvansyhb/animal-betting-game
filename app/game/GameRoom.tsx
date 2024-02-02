@@ -4,6 +4,7 @@ import { useAbly, useChannel, usePresence } from "ably/react";
 import { TOPIC } from "../constant";
 import { STATUS_ENUM } from "../../types/Room.type";
 import Image from "next/image";
+import { faker } from "@faker-js/faker";
 
 type Props = {};
 
@@ -37,7 +38,7 @@ export default function GameRoom({}: Props) {
   const { presenceData, updateStatus } = usePresence(channelName, {
     id: connection.id,
     status: STATUS_ENUM.ACTIVE,
-    name: "Sypv",
+    name: faker.person.firstName,
   });
   const isHost = currentRoom?.hostId === connection.id;
   
@@ -52,7 +53,7 @@ export default function GameRoom({}: Props) {
 
 
   function handleQuitRoom(){
-
+    
   }
 
 

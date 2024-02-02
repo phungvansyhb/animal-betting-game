@@ -20,5 +20,6 @@ export const TOPIC = {
 
 
 export const DB_PATH = {
-    ROOM : 'roomList/'
+    ROOM : 'roomList/',
+    USER : 'userList/'
 }

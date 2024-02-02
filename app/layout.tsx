@@ -13,6 +13,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+    
       <body className='w-screen'>
         <div className="w-full p-4 ">
             {children}
